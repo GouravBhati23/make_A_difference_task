@@ -213,7 +213,7 @@ The API client includes:
 
 ### Step 3 --- Raw ingestion
 
-`src/ingestion.py` requests 30 days of hourly data for each location and
+`src/ingest.py` requests 30 days of hourly data for each location and
 stores the complete JSON response in `raw_weather_api`.
 
 The current run processes:
@@ -227,7 +227,7 @@ x 24 hours
 
 ### Step 4 --- Hourly transformation
 
-`src/transform.py` converts the API's parallel hourly arrays into one
+`src/tranform.py` converts the API's parallel hourly arrays into one
 row per location/timestamp.
 
 For example:
@@ -240,12 +240,12 @@ becomes one relational row.
 
 ### Step 5 --- Daily aggregation
 
-`src/daily_aggregation.py` aggregates hourly observations into daily
+`src/daily_aggregation_db.py` aggregates hourly observations into daily
 metrics.
 
 ### Step 6 --- Reporting
 
-`src/reporting.py` creates state-level and daily trend datasets for
+`src/reporting_db.py` creates state-level and daily trend datasets for
 dashboard consumption.
 
 ### Step 7 --- Visualization
@@ -327,28 +327,25 @@ knowledge of the underlying API.
 ## 9. Project Structure
 
 ``` text
-weather-data-engineering/
+make_A_difference_task/
 |
 ├── data/
-│   └── locations.csv
+│   └── location.csv
 |
 ├── src/
 │   ├── __init__.py
 │   ├── weather_api.py
 │   ├── database.py
-│   ├── ingestion.py
-│   ├── transform.py
+│   ├── ingest.py
+│   ├── tranform.py
 │   ├── dim_location.py
-│   ├── daily_aggregation.py
-│   └── reporting.py
+│   ├── daily_aggregation_db.py
+│   └── reporting_db.py
 |
-├── tests/
-│   └── test_weather_api.py
 |
 ├── dashboard.py
 ├── requirements.txt
 ├── README.md
-└── .gitignore
 ```
 
 ## 10. Setup
@@ -396,7 +393,7 @@ python database.py
 ### 2. Ingest API data
 
 ``` bash
-python ingestion.py
+python ingest.py
 ```
 
 ### 3. Create/populate location dimension
@@ -408,19 +405,19 @@ python dim_location.py
 ### 4. Transform raw responses into hourly facts
 
 ``` bash
-python transform.py
+python tranform.py
 ```
 
 ### 5. Aggregate hourly data into daily data
 
 ``` bash
-python daily_aggregation.py
+python daily_aggregation_db.py
 ```
 
 ### 6. Create reporting tables
 
 ``` bash
-python reporting.py
+python reporting_db.py
 ```
 
 ### 7. Start dashboard
