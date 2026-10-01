@@ -66,7 +66,7 @@ data/weather.db
 The SQLite database is a generated artifact and does not need to be
 committed to GitHub.
 
-## 5. Architecture
+## 4. Architecture
 
 ``` text
                     Open-Meteo API
@@ -104,7 +104,7 @@ committed to GitHub.
                               +-------------------+
 ```
 
-## 6. Data Model
+## 5. Data Model
 
 ### `raw_weather_api`
 
@@ -191,7 +191,7 @@ The reporting layer contains dashboard-oriented aggregations:
 This keeps dashboard queries simpler and separates reporting logic from
 the detailed fact tables.
 
-## 7. Pipeline Flow
+## 6. Pipeline Flow
 
 ### Step 1 --- Load location metadata
 
@@ -270,7 +270,7 @@ For a production implementation, I would add explicit handling for HTTP
 429 and server-side 5xx responses with configurable retry limits and
 possibly request throttling.
 
-## 8. Meaningful Metrics
+## 7. Meaningful Metrics
 
 The project focuses on metrics that are understandable to both technical
 and non-technical users:
@@ -300,7 +300,7 @@ and non-technical users:
 The dashboard combines these metrics to provide both time-series and
 location/state comparisons.
 
-## 9. Dashboard
+## 8. Dashboard
 
 The Streamlit dashboard provides:
 
@@ -324,7 +324,7 @@ streamlit run dashboard.py
 The dashboard is designed to be understandable without requiring
 knowledge of the underlying API.
 
-## 10. Project Structure
+## 9. Project Structure
 
 ``` text
 weather-data-engineering/
@@ -351,7 +351,7 @@ weather-data-engineering/
 └── .gitignore
 ```
 
-## 11. Setup
+## 10. Setup
 
 ### Prerequisites
 
@@ -383,7 +383,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 12. Run the Pipeline
+## 11. Run the Pipeline
 
 Run the commands from the `src` directory where applicable.
 
@@ -431,7 +431,7 @@ From the project root:
 streamlit run dashboard.py
 ```
 
-## 13. Assumptions
+## 12. Assumptions
 
 1.  The project uses 100 representative locations rather than every city
     in India.
@@ -443,7 +443,7 @@ streamlit run dashboard.py
 6.  Daily aggregation is based on the hourly records stored in SQLite.
 7.  The local SQLite database is sufficient for the assignment scope.
 
-## 14. Tradeoffs
+## 13. Tradeoffs
 
 ### SQLite instead of PostgreSQL
 SQLite was selected because:
@@ -459,7 +459,7 @@ A 30-day window provides enough data for meaningful trends while keeping
 API ingestion and local processing lightweight.
 
 
-## 15. Results
+## 14. Results
 
 The final local pipeline currently produces approximately:
 
@@ -476,7 +476,7 @@ The dashboard consumes the modeled/reporting data rather than the raw
 API JSON.
 
 
-## 16. Conclusion
+## 15. Conclusion
 
 This project demonstrates an end-to-end data engineering workflow:
 
